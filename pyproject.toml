@@ -1,0 +1,18 @@
+[project]
+name = "bms-test-bench"
+version = "0.1.0"
+description = "Software-in-the-loop test bench for a battery management system controller"
+requires-python = ">=3.11"
+dependencies = ["python-can>=4.3"]
+
+[project.optional-dependencies]
+test = ["pytest>=8"]
+dashboard = ["streamlit>=1.35", "plotly>=5.20", "pandas>=2.2"]
+ai = ["google-genai>=1.0"]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["bench"]
