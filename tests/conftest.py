@@ -1,6 +1,10 @@
-"""Shared test setup: the CAN rig fixture, the req marker, and a summary."""
+"""Shared test setup: the CAN rig fixture, the req marker, results, and a summary."""
 import itertools
+import json
 import re
+from collections import Counter
+from datetime import datetime, timezone
+from pathlib import Path
 
 import can
 import pytest
@@ -93,6 +97,47 @@ def pytest_collection_modifyitems(config, items):
         problems += [f"{item.nodeid}: bad ID {i!r}" for i in ids if not REQ_PATTERN.match(i)]
     if problems:
         raise pytest.UsageError("Traceability check failed:\n  " + "\n  ".join(problems))
+
+
+# ---- results collection (feeds tools/trace_report.py) -----------------------
+RESULTS_PATH = Path(__file__).resolve().parent.parent / "reports" / "results.json"
+_results: dict[str, dict] = {}
+
+
+def pytest_collection_finish(session):
+    """Record every selected test with its requirement IDs before it runs."""
+    for item in session.items:
+        _results[item.nodeid] = {
+            "nodeid": item.nodeid, "name": item.name, "file": item.path.name,
+            "reqs": req_ids(item), "outcome": "not run", "duration_s": 0.0, "message": "",
+        }
+
+
+def pytest_runtest_logreport(report):
+    """Called for setup, call and teardown of each test: keep the final outcome."""
+    r = _results.get(report.nodeid)
+    if r is None:
+        return
+    r["duration_s"] = round(r["duration_s"] + report.duration, 4)
+    if report.failed:
+        r["outcome"] = "failed" if report.when == "call" else "error"
+        r["message"] = report.longreprtext[-2000:]      # keep the useful tail
+    elif report.skipped:
+        r["outcome"] = "skipped"
+    elif report.when == "call":
+        r["outcome"] = "passed"
+
+
+def pytest_sessionfinish(session):
+    if not _results or session.config.option.collectonly:
+        return
+    tests = list(_results.values())
+    RESULTS_PATH.parent.mkdir(exist_ok=True)
+    RESULTS_PATH.write_text(json.dumps({
+        "generated": datetime.now(timezone.utc).isoformat(timespec="seconds"),
+        "summary": {"total": len(tests), **Counter(t["outcome"] for t in tests)},
+        "tests": tests,
+    }, indent=2))
 
 
 # ---- short summary ----------------------------------------------------------
