@@ -132,7 +132,7 @@ def main() -> int:
         print(f"AI suggestions skipped: {missing} not set.\n"
               "That is fine: the bench, tests and CI do not need it.\n"
               "To try it:  export GEMINI_API_KEY=<your key>\n"
-              "            export GEMINI_MODEL=<a Gemini model name from Google AI Studio>")
+              "            export GEMINI_MODEL=<a current Gemini model name>")
         return 0
 
     try:

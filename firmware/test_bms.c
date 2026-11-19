@@ -78,7 +78,7 @@ static void test_timeout(void)                     /* REQ-10 */
     bms_on_reading(3700, 25, 1000);
     bms_tick(1499); CHECK(bms_get_state() == BMS_NORMAL);
     bms_tick(1500); CHECK(bms_get_state() == BMS_FAULT);
-    CHECK(bms_get_faults() & BMS_FAULT_TIMEOUT && !bms_get_contactor_closed());
+    CHECK((bms_get_faults() & BMS_FAULT_TIMEOUT) && !bms_get_contactor_closed());
     CHECK(!bms_on_reset());                         /* needs a fresh reading */
     bms_on_reading(3700, 25, 1600);
     CHECK(bms_on_reset());

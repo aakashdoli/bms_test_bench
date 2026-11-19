@@ -1,0 +1,10 @@
+# Streamlit settings for the dashboard (read when you run from the repo root).
+
+[runner]
+# "Magic" prints any bare expression on the page. Our helper calls return
+# None, which showed up as stray "None" boxes, so turn it off.
+magicEnabled = false
+
+[client]
+# Hide the Deploy button and developer menu for clean screenshots.
+toolbarMode = "minimal"

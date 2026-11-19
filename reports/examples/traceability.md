@@ -1,0 +1,21 @@
+# Traceability report
+
+Generated from test run at 2026-11-17T19:10:48+00:00.
+
+**12 of 12 requirements covered.** Tests: 45 passed of 45.
+
+
+| Requirement | Description | Tests | Result |
+|---|---|---|---|
+| REQ-01 | State is NORMAL when cell voltage is 3000 to 4200 mV and temperature is below 50°C. Contactor is closed. | 7/7 passed<br>`test_power_on_is_normal_with_contactor_closed`<br>`test_state_boundaries[3700-49-0]`<br>`test_state_boundaries[3700-50-1]`<br>`test_state_boundaries[3700-60-1]`<br>`test_state_boundaries[3000-25-0]`<br>`test_state_boundaries[4200-25-0]`<br>`test_state_boundaries[3700--20-0]` | ✅ PASS |
+| REQ-02 | State is WARNING when temperature is 50 to 60°C. Contactor stays closed. | 7/7 passed<br>`test_state_boundaries[3700-49-0]`<br>`test_state_boundaries[3700-50-1]`<br>`test_state_boundaries[3700-60-1]`<br>`test_state_boundaries[3000-25-0]`<br>`test_state_boundaries[4200-25-0]`<br>`test_state_boundaries[3700--20-0]`<br>`test_warning_returns_to_normal_when_cooled` | ✅ PASS |
+| REQ-03 | Over-temperature fault when temperature is above 60°C. | 3/3 passed<br>`test_fault_sets_bit_and_opens_contactor[61C]`<br>`test_fault_sets_bit_and_opens_contactor[90C]`<br>`test_two_causes_are_both_reported` | ✅ PASS |
+| REQ-04 | Under-voltage fault when voltage is below 3000 mV. | 2/2 passed<br>`test_fault_sets_bit_and_opens_contactor[2999mV]`<br>`test_fault_sets_bit_and_opens_contactor[2500mV]` | ✅ PASS |
+| REQ-05 | Over-voltage fault when voltage is above 4200 mV. | 3/3 passed<br>`test_fault_sets_bit_and_opens_contactor[4201mV]`<br>`test_fault_sets_bit_and_opens_contactor[4500mV]`<br>`test_two_causes_are_both_reported` | ✅ PASS |
+| REQ-06 | A fault only triggers after 3 bad readings in a row (debounce). A good reading resets the count. | 7/7 passed<br>`test_two_bad_readings_do_not_fault[3700-61]`<br>`test_two_bad_readings_do_not_fault[2999-25]`<br>`test_two_bad_readings_do_not_fault[4201-25]`<br>`test_third_bad_reading_faults`<br>`test_good_reading_resets_count`<br>`test_mixed_bad_causes_count_together`<br>`test_bad_checksum_counts_with_bad_readings` | ✅ PASS |
+| REQ-07 | On any fault, open the contactor (cut power) in the same step. | 8/8 passed<br>`test_fault_sets_bit_and_opens_contactor[61C]`<br>`test_fault_sets_bit_and_opens_contactor[90C]`<br>`test_fault_sets_bit_and_opens_contactor[2999mV]`<br>`test_fault_sets_bit_and_opens_contactor[2500mV]`<br>`test_fault_sets_bit_and_opens_contactor[4201mV]`<br>`test_fault_sets_bit_and_opens_contactor[4500mV]`<br>`test_contactor_closed_until_fault_step`<br>`test_timeout_sets_bit_and_opens_contactor` | ✅ PASS |
+| REQ-08 | A fault stays latched until a reset command is received. | 2/2 passed<br>`test_fault_stays_latched_after_good_readings`<br>`test_reset_accepted_when_normal` | ✅ PASS |
+| REQ-09 | Reset only works when the latest reading is normal. Otherwise it is ignored. | 7/7 passed<br>`test_reset_accepted_when_normal`<br>`test_reset_ignored_when_not_normal[2999-25]`<br>`test_reset_ignored_when_not_normal[3700-55]`<br>`test_reset_ignored_when_not_normal[3700-50]`<br>`test_reset_with_no_fault_changes_nothing`<br>`test_wrong_reset_code_is_ignored`<br>`test_reset_after_timeout_needs_fresh_frame` | ✅ PASS |
+| REQ-10 | Signal timeout: if no valid sensor frame arrives for 500 ms, go to fault. | 7/7 passed<br>`test_timeout_boundary[499-0]`<br>`test_timeout_boundary[500-2]`<br>`test_timeout_sets_bit_and_opens_contactor`<br>`test_no_frame_at_all_after_power_on`<br>`test_steady_frames_never_time_out`<br>`test_reset_after_timeout_needs_fresh_frame`<br>`test_dropped_frames_do_not_refresh_timer` | ✅ PASS |
+| REQ-11 | Frames with a wrong checksum are dropped and counted as bad readings. | 6/6 passed<br>`test_bad_checksum_frame_is_dropped`<br>`test_three_bad_checksums_fault`<br>`test_bad_checksum_counts_with_bad_readings`<br>`test_short_frame_counts_as_bad`<br>`test_checksum_is_xor_of_first_seven_bytes`<br>`test_dropped_frames_do_not_refresh_timer` | ✅ PASS |
+| REQ-12 | Frames with a repeated alive counter (replay or stuck sender) are dropped. | 5/5 passed<br>`test_replayed_frame_is_dropped`<br>`test_replay_does_not_count_as_bad`<br>`test_stuck_sender_cannot_hold_state`<br>`test_counter_wraps_from_255_to_0`<br>`test_dropped_frames_do_not_refresh_timer` | ✅ PASS |

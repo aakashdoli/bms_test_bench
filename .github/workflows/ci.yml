@@ -1,0 +1,53 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  bench:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+          cache-dependency-path: pyproject.toml
+
+      - name: Install Python dependencies
+        run: pip install -e ".[test]"
+
+      - name: Build C controller (shared library, -Werror)
+        run: make
+
+      - name: C unit tests
+        run: make test
+
+      - name: pytest over virtual CAN
+        run: pytest --junitxml=reports/junit.xml
+
+      - name: Traceability report (fails if a requirement has no test)
+        if: success() || failure()
+        run: |
+          python tools/trace_report.py
+          cat reports/traceability.md >> "$GITHUB_STEP_SUMMARY"
+
+      - name: AI suggestions (skipped politely when no key is set)
+        if: success() || failure()
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_MODEL: ${{ vars.GEMINI_MODEL }}
+        run: |
+          pip install -e ".[ai]" --quiet
+          python tools/ai_suggest.py
+
+      - name: Upload reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: bms-reports
+          path: reports/

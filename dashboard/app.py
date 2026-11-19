@@ -124,7 +124,10 @@ class Bench:
         plan = ([25] * 3 + [30, 38, 45, 52, 57] + [65] * 3 + [55, "reset", 45, 35]
                 + [25] * 2 + ["reset"] + [25] * 3)
         for step in plan:
-            self.send_reset() if step == "reset" else self.send_reading(3700, step)
+            if step == "reset":
+                self.send_reset()
+            else:
+                self.send_reading(3700, step)
 
 
 @st.cache_resource
@@ -144,7 +147,8 @@ def load_json(path: Path, default):
 
 def badge(text, color, size="2rem"):
     return (f'<div style="background:{color};color:#fff;border-radius:12px;padding:14px;'
-            f'text-align:center;font-size:{size};font-weight:700;letter-spacing:1px">{text}</div>')
+            f'text-align:center;font-size:{size};font-weight:700;letter-spacing:1px;'
+            f'margin-bottom:12px">{text}</div>')
 
 
 def color_result(v):
@@ -167,24 +171,26 @@ def tab_live(b: Bench):
         auto = st.toggle("Auto send every step", value=True,
                          help="When on, 'Advance time' also sends the slider values.")
 
-        c1, c2, c3, c4 = st.columns(4)
         with b.lock:
-            if c1.button("Send reading", type="primary", width="stretch"):
+            # Horizontal containers wrap buttons onto a new line instead of
+            # squeezing them, so labels are never cut off.
+            row = st.container(horizontal=True)
+            if row.button("Send reading", key="send", type="primary"):
                 b.send_reading(mv, temp)
-            if c2.button("Reset fault", width="stretch"):
+            if row.button("Reset fault", key="reset"):
                 b.send_reset()
-            if c3.button("Advance 100 ms", width="stretch"):
+            if row.button("Advance 100 ms", key="advance"):
                 b.advance(100, auto, mv, temp)
-            if c4.button("Run full scenario", width="stretch"):
+            if row.button("Run full scenario", key="scenario"):
                 b.scenario()
 
             st.markdown("**Fault injection**")
-            f = st.columns(3)
+            frow = st.container(horizontal=True)
             faults = [("Over-temperature", "over_temp"), ("Under-voltage", "under_volt"),
                       ("Over-voltage", "over_volt"), ("Bad checksum", "checksum"),
                       ("Replayed counter", "replay"), ("Signal loss", "signal_loss")]
-            for i, (label, kind) in enumerate(faults):
-                if f[i % 3].button(label, key=f"inj_{kind}", width="stretch"):
+            for label, kind in faults:
+                if frow.button(label, key=f"inj_{kind}"):
                     b.inject(kind, mv, temp)
 
     with right:
@@ -192,11 +198,14 @@ def tab_live(b: Bench):
         state = STATE_NAMES[s.state]
         st.subheader("Controller status")
         st.markdown(badge(state, COLORS[state], "2.6rem"), unsafe_allow_html=True)
-        st.write("")
-        m1, m2, m3 = st.columns(3)
-        m1.metric("Contactor", "CLOSED" if s.contactor_closed else "OPEN")
-        m2.metric("Debounce count", f"{b.bms.debounce_count()} / 3")
-        m3.metric("Bench time", f"{b.clock.now()} ms")
+        # Contactor gets its own smaller badge: green = power on, red = cut.
+        contactor = "CLOSED" if s.contactor_closed else "OPEN"
+        st.markdown(badge(f"Contactor {contactor}",
+                          COLORS["NORMAL"] if s.contactor_closed else COLORS["FAULT"], "1.3rem"),
+                    unsafe_allow_html=True)
+        m1, m2 = st.columns(2)
+        m1.metric("Debounce count", f"{b.bms.debounce_count()} / 3")
+        m2.metric("Bench time", f"{b.clock.now()} ms")
         words = decode_faults(s.faults)
         st.markdown(f"**Faults (0x{s.faults:02X}):** " + (", ".join(words) if words else "none"))
         st.caption("Status is read from CAN frame 0x200. Debounce count is read from the "
@@ -212,8 +221,14 @@ def tab_live(b: Bench):
         log["dropped"] = log["dropped"].map(lambda r: f"DROPPED: {r}" if r else "")
         log.columns = ["time (ms)", "dir", "frame ID", "raw bytes", "decoded", "dropped"]
         styled = log.style.apply(
-            lambda row: ["background-color:#ffebe9" if row["dropped"] else ""] * len(row), axis=1)
-        st.dataframe(styled, hide_index=True, width="stretch", height=320)
+            # see-through red: readable in both light and dark mode
+            lambda row: ["background-color:rgba(207,34,46,0.25)" if row["dropped"] else ""]
+            * len(row), axis=1)
+        # Give raw bytes enough room to show all 8 bytes, incl. the checksum.
+        st.dataframe(styled, hide_index=True, width="stretch", height=320,
+                     column_config={"raw bytes": st.column_config.TextColumn(width=280),
+                                    "time (ms)": st.column_config.NumberColumn(width=90),
+                                    "dir": st.column_config.TextColumn(width=60)})
 
 
 def make_charts(b: Bench) -> go.Figure:

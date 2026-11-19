@@ -1,0 +1,523 @@
+{
+  "generated": "2026-11-17T19:10:48+00:00",
+  "summary": {
+    "total": 45,
+    "passed": 45
+  },
+  "tests": [
+    {
+      "nodeid": "tests/test_debounce.py::test_two_bad_readings_do_not_fault[3700-61]",
+      "name": "test_two_bad_readings_do_not_fault[3700-61]",
+      "file": "test_debounce.py",
+      "reqs": [
+        "REQ-06"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.3374,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_debounce.py::test_two_bad_readings_do_not_fault[2999-25]",
+      "name": "test_two_bad_readings_do_not_fault[2999-25]",
+      "file": "test_debounce.py",
+      "reqs": [
+        "REQ-06"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0013,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_debounce.py::test_two_bad_readings_do_not_fault[4201-25]",
+      "name": "test_two_bad_readings_do_not_fault[4201-25]",
+      "file": "test_debounce.py",
+      "reqs": [
+        "REQ-06"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0011,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_debounce.py::test_third_bad_reading_faults",
+      "name": "test_third_bad_reading_faults",
+      "file": "test_debounce.py",
+      "reqs": [
+        "REQ-06"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0007,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_debounce.py::test_good_reading_resets_count",
+      "name": "test_good_reading_resets_count",
+      "file": "test_debounce.py",
+      "reqs": [
+        "REQ-06"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0007,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_debounce.py::test_mixed_bad_causes_count_together",
+      "name": "test_mixed_bad_causes_count_together",
+      "file": "test_debounce.py",
+      "reqs": [
+        "REQ-06"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0007,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_faults.py::test_fault_sets_bit_and_opens_contactor[61C]",
+      "name": "test_fault_sets_bit_and_opens_contactor[61C]",
+      "file": "test_faults.py",
+      "reqs": [
+        "REQ-07",
+        "REQ-03"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0008,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_faults.py::test_fault_sets_bit_and_opens_contactor[90C]",
+      "name": "test_fault_sets_bit_and_opens_contactor[90C]",
+      "file": "test_faults.py",
+      "reqs": [
+        "REQ-07",
+        "REQ-03"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.001,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_faults.py::test_fault_sets_bit_and_opens_contactor[2999mV]",
+      "name": "test_fault_sets_bit_and_opens_contactor[2999mV]",
+      "file": "test_faults.py",
+      "reqs": [
+        "REQ-07",
+        "REQ-04"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0009,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_faults.py::test_fault_sets_bit_and_opens_contactor[2500mV]",
+      "name": "test_fault_sets_bit_and_opens_contactor[2500mV]",
+      "file": "test_faults.py",
+      "reqs": [
+        "REQ-07",
+        "REQ-04"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0008,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_faults.py::test_fault_sets_bit_and_opens_contactor[4201mV]",
+      "name": "test_fault_sets_bit_and_opens_contactor[4201mV]",
+      "file": "test_faults.py",
+      "reqs": [
+        "REQ-07",
+        "REQ-05"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0007,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_faults.py::test_fault_sets_bit_and_opens_contactor[4500mV]",
+      "name": "test_fault_sets_bit_and_opens_contactor[4500mV]",
+      "file": "test_faults.py",
+      "reqs": [
+        "REQ-07",
+        "REQ-05"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0007,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_faults.py::test_contactor_closed_until_fault_step",
+      "name": "test_contactor_closed_until_fault_step",
+      "file": "test_faults.py",
+      "reqs": [
+        "REQ-07"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0005,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_faults.py::test_two_causes_are_both_reported",
+      "name": "test_two_causes_are_both_reported",
+      "file": "test_faults.py",
+      "reqs": [
+        "REQ-03",
+        "REQ-05"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0005,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_frame_integrity.py::test_bad_checksum_frame_is_dropped",
+      "name": "test_bad_checksum_frame_is_dropped",
+      "file": "test_frame_integrity.py",
+      "reqs": [
+        "REQ-11"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0005,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_frame_integrity.py::test_three_bad_checksums_fault",
+      "name": "test_three_bad_checksums_fault",
+      "file": "test_frame_integrity.py",
+      "reqs": [
+        "REQ-11"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0005,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_frame_integrity.py::test_bad_checksum_counts_with_bad_readings",
+      "name": "test_bad_checksum_counts_with_bad_readings",
+      "file": "test_frame_integrity.py",
+      "reqs": [
+        "REQ-11",
+        "REQ-06"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0005,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_frame_integrity.py::test_short_frame_counts_as_bad",
+      "name": "test_short_frame_counts_as_bad",
+      "file": "test_frame_integrity.py",
+      "reqs": [
+        "REQ-11"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0005,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_frame_integrity.py::test_checksum_is_xor_of_first_seven_bytes",
+      "name": "test_checksum_is_xor_of_first_seven_bytes",
+      "file": "test_frame_integrity.py",
+      "reqs": [
+        "REQ-11"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_frame_integrity.py::test_replayed_frame_is_dropped",
+      "name": "test_replayed_frame_is_dropped",
+      "file": "test_frame_integrity.py",
+      "reqs": [
+        "REQ-12"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0004,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_frame_integrity.py::test_replay_does_not_count_as_bad",
+      "name": "test_replay_does_not_count_as_bad",
+      "file": "test_frame_integrity.py",
+      "reqs": [
+        "REQ-12"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0005,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_frame_integrity.py::test_stuck_sender_cannot_hold_state",
+      "name": "test_stuck_sender_cannot_hold_state",
+      "file": "test_frame_integrity.py",
+      "reqs": [
+        "REQ-12"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0006,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_frame_integrity.py::test_counter_wraps_from_255_to_0",
+      "name": "test_counter_wraps_from_255_to_0",
+      "file": "test_frame_integrity.py",
+      "reqs": [
+        "REQ-12"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0005,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_latch_reset.py::test_fault_stays_latched_after_good_readings",
+      "name": "test_fault_stays_latched_after_good_readings",
+      "file": "test_latch_reset.py",
+      "reqs": [
+        "REQ-08"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0007,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_latch_reset.py::test_reset_accepted_when_normal",
+      "name": "test_reset_accepted_when_normal",
+      "file": "test_latch_reset.py",
+      "reqs": [
+        "REQ-08",
+        "REQ-09"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0005,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_latch_reset.py::test_reset_ignored_when_not_normal[2999-25]",
+      "name": "test_reset_ignored_when_not_normal[2999-25]",
+      "file": "test_latch_reset.py",
+      "reqs": [
+        "REQ-09"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0007,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_latch_reset.py::test_reset_ignored_when_not_normal[3700-55]",
+      "name": "test_reset_ignored_when_not_normal[3700-55]",
+      "file": "test_latch_reset.py",
+      "reqs": [
+        "REQ-09"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0008,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_latch_reset.py::test_reset_ignored_when_not_normal[3700-50]",
+      "name": "test_reset_ignored_when_not_normal[3700-50]",
+      "file": "test_latch_reset.py",
+      "reqs": [
+        "REQ-09"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0009,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_latch_reset.py::test_reset_with_no_fault_changes_nothing",
+      "name": "test_reset_with_no_fault_changes_nothing",
+      "file": "test_latch_reset.py",
+      "reqs": [
+        "REQ-09"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0004,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_latch_reset.py::test_wrong_reset_code_is_ignored",
+      "name": "test_wrong_reset_code_is_ignored",
+      "file": "test_latch_reset.py",
+      "reqs": [
+        "REQ-09"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0005,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_states.py::test_power_on_is_normal_with_contactor_closed",
+      "name": "test_power_on_is_normal_with_contactor_closed",
+      "file": "test_states.py",
+      "reqs": [
+        "REQ-01"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0004,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_states.py::test_state_boundaries[3700-49-0]",
+      "name": "test_state_boundaries[3700-49-0]",
+      "file": "test_states.py",
+      "reqs": [
+        "REQ-01",
+        "REQ-02"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0007,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_states.py::test_state_boundaries[3700-50-1]",
+      "name": "test_state_boundaries[3700-50-1]",
+      "file": "test_states.py",
+      "reqs": [
+        "REQ-01",
+        "REQ-02"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0006,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_states.py::test_state_boundaries[3700-60-1]",
+      "name": "test_state_boundaries[3700-60-1]",
+      "file": "test_states.py",
+      "reqs": [
+        "REQ-01",
+        "REQ-02"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0007,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_states.py::test_state_boundaries[3000-25-0]",
+      "name": "test_state_boundaries[3000-25-0]",
+      "file": "test_states.py",
+      "reqs": [
+        "REQ-01",
+        "REQ-02"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0006,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_states.py::test_state_boundaries[4200-25-0]",
+      "name": "test_state_boundaries[4200-25-0]",
+      "file": "test_states.py",
+      "reqs": [
+        "REQ-01",
+        "REQ-02"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0006,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_states.py::test_state_boundaries[3700--20-0]",
+      "name": "test_state_boundaries[3700--20-0]",
+      "file": "test_states.py",
+      "reqs": [
+        "REQ-01",
+        "REQ-02"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0006,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_states.py::test_warning_returns_to_normal_when_cooled",
+      "name": "test_warning_returns_to_normal_when_cooled",
+      "file": "test_states.py",
+      "reqs": [
+        "REQ-02"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0004,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_timeout.py::test_timeout_boundary[499-0]",
+      "name": "test_timeout_boundary[499-0]",
+      "file": "test_timeout.py",
+      "reqs": [
+        "REQ-10"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0006,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_timeout.py::test_timeout_boundary[500-2]",
+      "name": "test_timeout_boundary[500-2]",
+      "file": "test_timeout.py",
+      "reqs": [
+        "REQ-10"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.001,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_timeout.py::test_timeout_sets_bit_and_opens_contactor",
+      "name": "test_timeout_sets_bit_and_opens_contactor",
+      "file": "test_timeout.py",
+      "reqs": [
+        "REQ-10",
+        "REQ-07"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0004,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_timeout.py::test_no_frame_at_all_after_power_on",
+      "name": "test_no_frame_at_all_after_power_on",
+      "file": "test_timeout.py",
+      "reqs": [
+        "REQ-10"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0004,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_timeout.py::test_steady_frames_never_time_out",
+      "name": "test_steady_frames_never_time_out",
+      "file": "test_timeout.py",
+      "reqs": [
+        "REQ-10"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0017,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_timeout.py::test_reset_after_timeout_needs_fresh_frame",
+      "name": "test_reset_after_timeout_needs_fresh_frame",
+      "file": "test_timeout.py",
+      "reqs": [
+        "REQ-10",
+        "REQ-09"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0005,
+      "message": ""
+    },
+    {
+      "nodeid": "tests/test_timeout.py::test_dropped_frames_do_not_refresh_timer",
+      "name": "test_dropped_frames_do_not_refresh_timer",
+      "file": "test_timeout.py",
+      "reqs": [
+        "REQ-10",
+        "REQ-11",
+        "REQ-12"
+      ],
+      "outcome": "passed",
+      "duration_s": 0.0006,
+      "message": ""
+    }
+  ]
+}
